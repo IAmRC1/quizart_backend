@@ -8,15 +8,19 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "nodemon server.js --watch",
+    "dev": "nodemon server.js",
     "start": "node server.js",
     "lint": "eslint '**/*.js'"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.4.1"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2"
   }
 }
