@@ -1,0 +1,22 @@
+{
+  "name": "quizart",
+  "version": "0.0.1",
+  "description": "A quiz based gaming app with real money.",
+  "main": "server.js",
+  "repository": "https://github.com/IAmRC1/quizart_backend.git",
+  "author": "Rishabh Singh <rishabhcena1@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "nodemon server.js --watch",
+    "start": "node server.js",
+    "lint": "eslint '**/*.js'"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
