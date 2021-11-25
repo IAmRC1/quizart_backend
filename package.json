@@ -13,6 +13,8 @@
     "lint": "eslint '**/*.js'"
   },
   "devDependencies": {
+    "chalk": "^4.1.2",
+    "errorhandler": "^1.5.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.4.1"
@@ -21,6 +23,7 @@
     "config": "^3.3.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-session": "^1.17.2"
+    "express-session": "^1.17.2",
+    "mongoose": "^6.0.13"
   }
 }
