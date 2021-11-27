@@ -1,10 +1,22 @@
-const router = require('express').Router()
+import express from "express"
+import {
+    getAllCourses,
+    getCourseById,
+    createCourse,
+    updateCourse,
+    deleteCourse,
+} from "../controllers/course.js"
+import { courseSchema } from "../utils/validation.js"
 
-// define the home page route
-router.get('/', function (req, res) {
-  res.send('Course home page')
-});
+const courseRoutes = express.Router()
+
+courseRoutes.get("/", getAllCourses)
+courseRoutes.post("/", courseSchema, createCourse)
+
+courseRoutes.get("/:id", getCourseById)
+courseRoutes.put("/:id", updateCourse)
+courseRoutes.delete("/:id", deleteCourse)
 
 // Todo Add Swagger Docs
 
-module.exports = router
+export default courseRoutes

@@ -1,42 +1,24 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
+import { nanoid } from 'nanoid';
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
-const courseSchema = new Schema({
-    category: {
-        title: {
-            type: String,
-            required: true,
-        },
+const courseSchema = new Schema(
+  {
+    _id: {
+      type: String,
+      default: () => nanoid()
     },
-    subCategory: {
-        title: {
-            type: String,
-            default: '',
-        },
+    title: String,
+  },
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
     },
-    class: {
-        title: {
-            type: String,
-            default: '',
-        },
-    },
-    subject: {
-        title: {
-            type: String,
-            default: '',
-        },
-    },
-    chapter: {
-        title: {
-            type: String,
-            default: '',
-        },
-    }
-},  {
-        timestamps: true,
-    });
+  },
+)
 
-const Course = mongoose.model('Course', courseSchema);
+const Course = mongoose.model("Course", courseSchema)
 
-module.exports = Course;
+export default Course

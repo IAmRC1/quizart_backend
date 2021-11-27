@@ -1,6 +1,8 @@
-const app = require('express')();
+import express from 'express';
+const app = express();
+import courseRoutes from './course.js';
 
-app.use('/course', require('./course'));
+app.use("/courses", courseRoutes)
 // Further routes can be added here
 
-module.exports = app;
+export default app

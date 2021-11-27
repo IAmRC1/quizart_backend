@@ -1,28 +1,24 @@
 {
-  "plugins": ["prettier"],
   "env": {
-    "node": true,
-    "commonjs": true,
+    "browser": true,
     "es6": true,
-    "jest": true
+    "node": true,
+    "commonjs": true
   },
-  "globals": {},
   "extends": ["airbnb-base", "prettier"],
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "sourceType": "module"
+  "plugins": ["prettier"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
   },
-  "settings": {
-    "import/resolver": {
-      "babel-plugin-root-import": {
-        "rootPathPrefix": "~",
-        "rootPathSuffix": "src"
-      }
-    }
+  "parserOptions": {
+    "ecmaVersion": 2021
   },
   "rules": {
-    "import/prefer-default-export": "off",
     "prettier/prettier": "error",
-    "no-underscore-dangle": "off"
+    "import/first": "off",
+    "tabs": "off",
+    "no-param-reassign": "off",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
   }
 }
