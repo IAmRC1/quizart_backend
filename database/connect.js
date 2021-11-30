@@ -1,6 +1,6 @@
 import config from "config"
 import mongoose from "mongoose"
-import { info, success, error, log } from "../utils/chalk.js"
+import { info, success, error, } from "../utils/colorLogging.js"
 
 const { connection, connect } = mongoose
 
@@ -12,22 +12,22 @@ const connectDB = async () => {
     try {
         // Demonstrate the readyState and on event emitters
         connection.on("connecting", () => {
-            log(info(`${connection.readyState}: Connecting to database`))
+            console.log(info(`${connection.readyState}: Connecting to database`))
         })
         connection.on("connected", () => {
-            log(success(`${connection.readyState}: Connected to database`))
+            console.log(success(`${connection.readyState}: Connected to database`))
         })
         connection.on("disconnecting", () => {
-            log(info(`${connection.readyState}: Disconnecting from database`))
+            console.log(info(`${connection.readyState}: Disconnecting from database`))
         })
         connection.on("disconnected", () => {
-            log(error(`${connection.readyState}: Disconnected from database`))
+            console.log(error(`${connection.readyState}: Disconnected from database`))
         })
         connection.on("close", () => {
-            log(error(`${connection.readyState}: Connection closed`))
+            console.log(error(`${connection.readyState}: Connection closed`))
         })
         connection.on("reconnected", () => {
-            log(success(`${connection.readyState}: Reconnected to database`))
+            console.log(success(`${connection.readyState}: Reconnected to database`))
         })
 
         await connect(uri, {
@@ -36,7 +36,7 @@ const connectDB = async () => {
         })
     } catch {
         connection.on("error", (err) => {
-            log(error(err))
+            console.log(error(err))
         })
         // If Mongoose gave up trying to reconnect, kill the process.
         connection.on("reconnectFailed", () => {
@@ -46,7 +46,7 @@ const connectDB = async () => {
                 )
             })
         })
-        process.exit(1);
+        process.exit(1)
     }
 }
 

@@ -1,8 +1,11 @@
-import express from 'express';
-const app = express();
-import courseRoutes from './course.js';
+import express from "express"
+import categoryRoutes from "./category.js"
+import subCategoryRoutes from "./subCategory.js"
 
-app.use("/courses", courseRoutes)
+const app = express()
+
+app.use("/categories", categoryRoutes)
+app.use("/subcategories", subCategoryRoutes)
 // Further routes can be added here
 
 export default app

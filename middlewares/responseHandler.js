@@ -2,21 +2,20 @@ const responseHandler = (req, res, next) => {
     /**
      * Success response
      */
-    res.success = (code = 200, message = 'Success!', data = [], ...rest) => {
-        return res.json({
+    res.success = (code = 200, message = "Success!", data = [], ...rest) =>
+        res.json({
             code,
             message,
             error: false,
             result: {
                 data,
                 pagination: rest[0],
-            }
+            },
         })
-    }
     /**
      * Error response
      */
-    res.error = function(code = 500, message = 'Error!', errors = {}) {
+    res.error = function (code = 500, message = "Error!", errors = {}) {
         return res.json({
             code,
             message,
@@ -31,7 +30,7 @@ const responseHandler = (req, res, next) => {
     // res.forbidden = function({errors={}, code=403, message="", result={}}) {
     //     return res.status(403).error({ errors, code, message, result })
     // }
-    
+
     /**
      * (status 401)
      * Unauthorize request response
@@ -47,7 +46,7 @@ const responseHandler = (req, res, next) => {
     // res.ise = function(code = 500, message = "", errors = {}) {
     //     return res.sendStatus(500)
     // }
-    next();
-};
+    next()
+}
 
-export default responseHandler;
+export default responseHandler
