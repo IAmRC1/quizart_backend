@@ -1,24 +1,25 @@
 import mongoose from "mongoose"
 import { nanoid } from "nanoid"
 import Joi from "joi"
-import subjectSchema from "./subject.js"
+import chapterSchema from "./chapter.js"
 
-export const classType = Joi.object({
+export const subjectType = Joi.object({
 	_category_id: Joi.string().required(),
 	_subcategory_id: Joi.string().required(),
+    _class_id: Joi.string().required(),
 	title: Joi.string().min(6).max(32).required(),
 })
 
 const { Schema } = mongoose
 
-const classSchema = new Schema(
+const subjectSchema = new Schema(
 	{
 		_id: {
 			type: String,
 			default: () => nanoid(),
 		},
 		title: String,
-		subjects: [subjectSchema],
+		chapters: [chapterSchema],
 	},
 	{
 		timestamps: {
@@ -28,4 +29,4 @@ const classSchema = new Schema(
 	}
 )
 
-export default classSchema;
+export default subjectSchema;

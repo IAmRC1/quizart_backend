@@ -25,7 +25,7 @@ const updateCategory = async (req, res) => {
         if (!category) {
             res.error(res.statusCode, "category not found!")
         } else {
-            const updatedCategory = await Category.updateOne(req.params._id, req.body, {new: true})
+            const updatedCategory = await Category.updateOne(req.params._id, req.body, { new: true })
             res.success(res.statusCode, "category updated!", updatedCategory)
         }
     } catch (err) {

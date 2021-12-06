@@ -4,7 +4,7 @@ import Joi from "joi"
 import subCategorySchema from "./subCategory.js"
 
 export const categoryType = Joi.object({
-  title: Joi.string().min(6).max(32).required(),
+    title: Joi.string().min(6).max(32).required(),
 })
 
 const { Schema } = mongoose
@@ -12,25 +12,19 @@ const { Schema } = mongoose
 const categorySchema = new Schema(
   {
     _id: {
-      type: String,
-      default: () => nanoid(),
+        type: String,
+        default: () => nanoid(),
     },
     title: String,
     sub_categories: [subCategorySchema],
   },
   {
     timestamps: {
-      createdAt: "created_at",
-      updatedAt: "updated_at",
+        createdAt: "created_at",
+        updatedAt: "updated_at",
     },
   }
 )
-
-// Only document middleware
-// categorySchema.pre('remove', { document: true, query: false }, async function() {
-//   await SubCategory.deleteMany({ _category_id : this._id })
-//   console.log('Removed child docs too!');
-// });
 
 const Category = mongoose.model("Category", categorySchema)
 

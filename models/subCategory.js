@@ -8,7 +8,7 @@ export const subCategoryType = Joi.object({
   title: Joi.string().min(6).max(32).required(),
   description: Joi.string().min(32).max(256).required(),
   yearly_price: Joi.number().min(0).max(10000),
-  is_active: Joi.boolean(),
+  is_active: Joi.boolean().required(),
   image_url: Joi.string().uri(),
 })
 
