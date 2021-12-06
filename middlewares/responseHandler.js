@@ -3,7 +3,7 @@ const responseHandler = (req, res, next) => {
    * Success response
    */
     res.success = (code = 200, message = "Success!", data = [], ...rest) =>
-        res.json({
+        res.status(code).json({
             code,
             message,
             error: false,
@@ -15,14 +15,13 @@ const responseHandler = (req, res, next) => {
     /**
    * Error response
    */
-    res.error = function (code = 500, message = "Error!", errors = {}) {
-        return res.json({
+    res.error = (code = 500, message = "Error!", errors = {}) => 
+        res.status(code).json({
             code,
             message,
             error: true,
             errors,
         })
-    }
     /**
    * (status 403)
    * Forbidden request response

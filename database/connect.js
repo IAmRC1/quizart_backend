@@ -35,8 +35,8 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
-        await mongoose.connection.db.dropDatabase()
-        await seedDB()
+        // await mongoose.connection.db.dropDatabase()
+        // await seedDB()
     } catch {
         connection.on("error", (err) => {
             console.log(error(err))

@@ -2,7 +2,7 @@ import Category from "../models/category.js"
 
 const getAllCategories = async (req, res) => {
     try {
-        const categories = await Category.find({})
+        const categories = await Category.find({}).select("-sub_categories")
         res.success(res.statusCode, "all categories fetched!", categories)
     } catch (err) {
         res.error(res.statusCode, err.message)
@@ -19,18 +19,27 @@ const createCategory = async (req, res) => {
     }
 }
 
-const updateCategory = async (req, res) => {
+const getCategory = async (req, res) => {
+    const { _id } = req.params
     try {
-        const category = await Category.findById(req.params._id)
-        if (!category) {
-            res.error(res.statusCode, "category not found!")
-        } else {
-            const updatedCategory = await Category.updateOne(
-                req.params._id,
-                req.body,
-                { new: true }
-            )
+        const category = await Category.findById(_id)
+        res.success(res.statusCode, "category fetched!", category)
+    } catch (err) {
+        res.error(res.statusCode, err.message)
+    }
+}
+
+const updateCategory = async (req, res) => {
+    const { _id } = req.params
+    try {
+        const category = await Category.findById(_id)
+        if (category) {
+            const updatedCategory = await Category.findByIdAndUpdate(_id, req.body, {
+                new: true,
+            })
             res.success(res.statusCode, "category updated!", updatedCategory)
+        } else {
+            res.error(404, "category not found!")
         }
     } catch (err) {
         res.error(res.statusCode, err.message)
@@ -38,17 +47,13 @@ const updateCategory = async (req, res) => {
 }
 
 const deleteCategory = async (req, res) => {
+    const { _id } = req.params
     try {
-        const category = await Category.findById(req.params._id)
-        if (!category) {
-            res.error(res.statusCode, "category not found!")
-        } else {
-            await category.remove()
-            res.success(res.statusCode, "category deleted!")
-        }
+        await Category.findByIdAndRemove(_id)
+        res.success(res.statusCode, "category deleted!")
     } catch (err) {
         res.error(res.statusCode, err.message)
     }
 }
 
-export { getAllCategories, createCategory, updateCategory, deleteCategory }
+export { getAllCategories, createCategory, getCategory, updateCategory, deleteCategory }

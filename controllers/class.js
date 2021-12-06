@@ -28,11 +28,12 @@ const createClass = async (req, res) => {
         if (category) {
             const subCategory = await category.sub_categories.id(_subcategory_id)
             if (subCategory) {
+                const newClass = await subCategory.classes.create(rest)
                 await Category.updateOne(
                     { _id: _category_id, "sub_categories._id": _subcategory_id },
-                    { $push: { "sub_categories.$.classes": rest } }
+                    { $push: { "sub_categories.$.classes": newClass } }
                 )
-                res.success(res.statusCode, "class created!")
+                res.success(res.statusCode, "class created!", newClass)
             } else {
                 res.error(res.statusCode, "subcategory not found!")
             }
