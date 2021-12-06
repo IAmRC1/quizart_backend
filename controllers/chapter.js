@@ -1,18 +1,24 @@
-import Category from '../models/category.js';
+import Category from "../models/category.js"
 
 // Get all chapters under one subject
 const getAllChapters = async (req, res) => {
     const { _category_id, _subcategory_id, _class_id, _subject_id } = req.query
     try {
         const category = await Category.findById(_category_id)
-        if(category){
-            const subCategory = await category.sub_categories.id(_subcategory_id)
-            if(subCategory){
+        if (category) {
+            const subCategory = await category.sub_categories.id(
+                _subcategory_id
+            )
+            if (subCategory) {
                 const classes = await subCategory.classes.id(_class_id)
-                if(classes){
+                if (classes) {
                     const subject = await classes.subjects.id(_subject_id)
-                    if(subject){
-                        res.success(res.statusCode, "all chapters fetched!", subject.chapters)
+                    if (subject) {
+                        res.success(
+                            res.statusCode,
+                            "all chapters fetched!",
+                            subject.chapters
+                        )
                     } else {
                         res.error(res.statusCode, "subject not found!")
                     }
@@ -32,30 +38,44 @@ const getAllChapters = async (req, res) => {
 
 // Create a new chapter under one subject
 const createChapter = async (req, res) => {
-    const { _category_id, _subcategory_id, _class_id, _subject_id, ...rest } = req.body
+    const { _category_id, _subcategory_id, _class_id, _subject_id, ...rest } =
+        req.body
     try {
         const category = await Category.findById(_category_id)
-        if(category){
-            const subCategory = await category.sub_categories.id(_subcategory_id)
-            if(subCategory){
+        if (category) {
+            const subCategory = await category.sub_categories.id(
+                _subcategory_id
+            )
+            if (subCategory) {
                 const classes = await subCategory.classes.id(_class_id)
-                if(classes){
+                if (classes) {
                     const subject = await classes.subjects.id(_subject_id)
-                    if(subject){
-                        await Category.updateOne({ 
-                        _id: _category_id, 
-                    }, { 
-                        $push: { 'sub_categories.$[i].classes.$[j].subjects.$[k].chapters': rest } 
-                    }, {
-                        arrayFilters: [{
-                            "i._id": _subcategory_id
-                        }, {
-                            "j._id": _class_id
-                        },{
-                            "k._id": _subject_id
-                        }]
-                    })
-                    res.success(res.statusCode, "chapter created!")
+                    if (subject) {
+                        await Category.updateOne(
+                            {
+                                _id: _category_id,
+                            },
+                            {
+                                $push: {
+                                    "sub_categories.$[i].classes.$[j].subjects.$[k].chapters":
+                                        rest,
+                                },
+                            },
+                            {
+                                arrayFilters: [
+                                    {
+                                        "i._id": _subcategory_id,
+                                    },
+                                    {
+                                        "j._id": _class_id,
+                                    },
+                                    {
+                                        "k._id": _subject_id,
+                                    },
+                                ],
+                            }
+                        )
+                        res.success(res.statusCode, "chapter created!")
                     } else {
                         res.error(res.statusCode, "subject not found!")
                     }
@@ -73,7 +93,4 @@ const createChapter = async (req, res) => {
     }
 }
 
-export {
-    getAllChapters,
-    createChapter,
-}
+export { getAllChapters, createChapter }

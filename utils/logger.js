@@ -19,8 +19,8 @@ import morgan from "morgan"
 // const accessLogStream = fs.createWriteStream(path.join(__dirname, 'morgan.log'))
 const morganLogger = () =>
     morgan("dev", {
-        // stream: accessLogStream,
-        // skip: (req, res) => res.statusCode < 400
+    // stream: accessLogStream,
+    // skip: (req, res) => res.statusCode < 400
     })
 
 export default morganLogger

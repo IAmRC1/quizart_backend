@@ -12,25 +12,25 @@ export const couponType = Joi.object({
 const { Schema } = mongoose
 
 const couponSchema = new Schema(
-  {
-    _id: {
-      type: String,
-      default: () => nanoid(),
+    {
+        _id: {
+            type: String,
+            default: () => nanoid(),
+        },
+        code: String,
+        d_percent: Number,
+        d_amount: Number,
+        is_active: {
+            type: Boolean,
+            default: false,
+        },
     },
-    code: String,
-    d_percent: Number,
-    d_amount: Number,
-    is_active: {
-        type: Boolean,
-        default: false,
-    },
-  },
-  {
-    timestamps: {
-      createdAt: "created_at",
-      updatedAt: "updated_at",
-    },
-  }
+    {
+        timestamps: {
+            createdAt: "created_at",
+            updatedAt: "updated_at",
+        },
+    }
 )
 
-export default couponSchema;
+export default couponSchema

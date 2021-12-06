@@ -5,7 +5,7 @@
     "node": true,
     "commonjs": true
   },
-  "extends": ["airbnb-base", "prettier"],
+  "extends": ["airbnb-base", "prettier", "eslint:recommended"],
   "plugins": ["prettier"],
   "globals": {
     "Atomics": "readonly",
@@ -15,10 +15,21 @@
     "ecmaVersion": 2021
   },
   "rules": {
-    "prettier/prettier": "error",
-    "import/first": "off",
-    "tabs": "off",
-    "no-param-reassign": "off",
-    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
+    "no-console": 0,
+    "no-underscore-dangle": 0,
+    "camelcase": 0,
+    "import/first": 2,
+    "indent": ["error", 4],
+    "quotes": [2, "double"],
+    "semi": [2, "never"],
+    "import/extensions": [
+      0,
+      "ignorePackages",
+      {
+        "js": "never"
+      }
+    ],
+    "no-param-reassign": 2,
+    "no-unused-vars": [2, { "argsIgnorePattern": "next" }]
   }
 }

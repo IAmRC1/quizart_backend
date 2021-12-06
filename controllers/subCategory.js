@@ -5,8 +5,12 @@ const getAllSubCategories = async (req, res) => {
     const { _category_id } = req.query
     try {
         const category = await Category.findById(_category_id)
-        if(category){
-            res.success(res.statusCode, "all subcategories fetched!", category.sub_categories)
+        if (category) {
+            res.success(
+                res.statusCode,
+                "all subcategories fetched!",
+                category.sub_categories
+            )
         } else {
             res.error(res.statusCode, "category not found!")
         }
@@ -20,9 +24,11 @@ const createSubCategory = async (req, res) => {
     const { _category_id, ...rest } = req.body
     try {
         const category = await Category.findById(_category_id)
-        if(category){
-            await Category.updateOne({ _id: _category_id },
-                { $push: { sub_categories: rest } })
+        if (category) {
+            await Category.updateOne(
+                { _id: _category_id },
+                { $push: { sub_categories: rest } }
+            )
             res.success(res.statusCode, "subcategory created!")
         } else {
             res.error(res.statusCode, "category not found!")
@@ -37,9 +43,10 @@ const updateSubCategory = async (req, res) => {
     const { _category_id, ...rest } = req.body
     try {
         const category = await Category.findById(_category_id)
-        if(category){
-            const updatedCategory = await Category.findByIdAndUpdate(_category_id,
-                { $set: { "sub_categories.$": rest } })
+        if (category) {
+            const updatedCategory = await Category.findByIdAndUpdate(_category_id, {
+                $set: { "sub_categories.$": rest },
+            })
             res.success(res.statusCode, "subcategory updated!", updatedCategory)
         } else {
             res.error(res.statusCode, "category not found!")
@@ -51,12 +58,13 @@ const updateSubCategory = async (req, res) => {
 
 // Delete a subcategory under one category
 const deleteSubCategory = async (req, res) => {
-    const { _category_id, _id } = req.query;
+    const { _category_id, _id } = req.query
     try {
         const category = await Category.findById(_category_id)
-        if(category){
-            const newSubCategory = await Category.findByIdAndUpdate(_category_id, 
-                { $pull: { sub_categories: { _id } } })
+        if (category) {
+            const newSubCategory = await Category.findByIdAndUpdate(_category_id, {
+                $pull: { sub_categories: { _id } },
+            })
             res.success(res.statusCode, "subcategory deleted!", newSubCategory)
         } else {
             res.error(res.statusCode, "category not found!")
@@ -67,8 +75,8 @@ const deleteSubCategory = async (req, res) => {
 }
 
 export {
-    getAllSubCategories, 
+    getAllSubCategories,
     createSubCategory,
     updateSubCategory,
-    deleteSubCategory
+    deleteSubCategory,
 }

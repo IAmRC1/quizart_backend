@@ -1,6 +1,6 @@
 import config from "config"
 import mongoose from "mongoose"
-import { info, success, error, } from "../utils/colorLogging.js"
+import { info, success, error } from "../utils/colorLogging.js"
 import seedDB from "./seed.js"
 
 const { connection, connect } = mongoose
@@ -11,7 +11,7 @@ const connectDB = async () => {
     const uri = `mongodb://${host}:${port}/${dbName}`
 
     try {
-        // Demonstrate the readyState and on event emitters
+    // Demonstrate the readyState and on event emitters
         connection.on("connecting", () => {
             console.log(info(`${connection.readyState}: Connecting to DB`))
         })
@@ -35,7 +35,8 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
-        // await seedDB();
+        await mongoose.connection.db.dropDatabase()
+        await seedDB()
     } catch {
         connection.on("error", (err) => {
             console.log(error(err))
@@ -43,9 +44,7 @@ const connectDB = async () => {
         // If Mongoose gave up trying to reconnect, kill the process.
         connection.on("reconnectFailed", () => {
             process.nextTick(() => {
-                throw new Error(
-                    "Mongoose could not reconnect to MongoDB server"
-                )
+                throw new Error("Mongoose could not reconnect to MongoDB server")
             })
         })
         process.exit(1)

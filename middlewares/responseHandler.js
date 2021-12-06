@@ -1,7 +1,7 @@
 const responseHandler = (req, res, next) => {
     /**
-     * Success response
-     */
+   * Success response
+   */
     res.success = (code = 200, message = "Success!", data = [], ...rest) =>
         res.json({
             code,
@@ -13,8 +13,8 @@ const responseHandler = (req, res, next) => {
             },
         })
     /**
-     * Error response
-     */
+   * Error response
+   */
     res.error = function (code = 500, message = "Error!", errors = {}) {
         return res.json({
             code,
@@ -24,25 +24,25 @@ const responseHandler = (req, res, next) => {
         })
     }
     /**
-     * (status 403)
-     * Forbidden request response
-     */
+   * (status 403)
+   * Forbidden request response
+   */
     // res.forbidden = function({errors={}, code=403, message="", result={}}) {
     //     return res.status(403).error({ errors, code, message, result })
     // }
 
     /**
-     * (status 401)
-     * Unauthorize request response
-     */
+   * (status 401)
+   * Unauthorize request response
+   */
     // res.unauth = function({errors={}, code=401, message="", result={}}) {
     //     return res.status(401).error({ errors, code, message, result })
     // }
 
     /**
-     * (status 500)
-     * Internal request response
-     */
+   * (status 500)
+   * Internal request response
+   */
     // res.ise = function(code = 500, message = "", errors = {}) {
     //     return res.sendStatus(500)
     // }

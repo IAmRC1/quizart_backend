@@ -10,20 +10,20 @@ export const categoryType = Joi.object({
 const { Schema } = mongoose
 
 const categorySchema = new Schema(
-  {
-    _id: {
-        type: String,
-        default: () => nanoid(),
+    {
+        _id: {
+            type: String,
+            default: () => nanoid(),
+        },
+        title: String,
+        sub_categories: [subCategorySchema],
     },
-    title: String,
-    sub_categories: [subCategorySchema],
-  },
-  {
-    timestamps: {
-        createdAt: "created_at",
-        updatedAt: "updated_at",
-    },
-  }
+    {
+        timestamps: {
+            createdAt: "created_at",
+            updatedAt: "updated_at",
+        },
+    }
 )
 
 const Category = mongoose.model("Category", categorySchema)

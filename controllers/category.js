@@ -9,11 +9,11 @@ const getAllCategories = async (req, res) => {
     }
 }
 
-const createCategory= async (req, res) => {
+const createCategory = async (req, res) => {
     const category = new Category(req.body)
     try {
         const newCategory = await category.save()
-        res.success(res.statusCode, "category created!", newCategory)
+        res.success(201, "category created!", newCategory)
     } catch (err) {
         res.error(res.statusCode, err.message)
     }
@@ -25,7 +25,11 @@ const updateCategory = async (req, res) => {
         if (!category) {
             res.error(res.statusCode, "category not found!")
         } else {
-            const updatedCategory = await Category.updateOne(req.params._id, req.body, { new: true })
+            const updatedCategory = await Category.updateOne(
+                req.params._id,
+                req.body,
+                { new: true }
+            )
             res.success(res.statusCode, "category updated!", updatedCategory)
         }
     } catch (err) {
@@ -47,9 +51,4 @@ const deleteCategory = async (req, res) => {
     }
 }
 
-export {
-    getAllCategories,
-    createCategory,
-    updateCategory,
-    deleteCategory,
-}
+export { getAllCategories, createCategory, updateCategory, deleteCategory }

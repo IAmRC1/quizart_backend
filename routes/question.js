@@ -1,9 +1,9 @@
 import express from "express"
 import {
-//     getAllQuestions,
+    //     getAllQuestions,
     createQuestion,
-//     updateQuestion,
-//     deleteQuestion,
+    //     updateQuestion,
+    //     deleteQuestion,
 } from "../controllers/question.js"
 import validation from "../utils/validation.js"
 import { questionType } from "../models/question.js"

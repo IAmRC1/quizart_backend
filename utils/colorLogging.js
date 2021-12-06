@@ -8,12 +8,4 @@ const warning = chalk.bold.yellow
 const info = chalk.bold.cyan
 const serverStatus = chalk.magenta.italic
 
-export { 
-    primary, 
-    secondary, 
-    success, 
-    error, 
-    warning, 
-    info, 
-    serverStatus, 
-}
+export { primary, secondary, success, error, warning, info, serverStatus }
