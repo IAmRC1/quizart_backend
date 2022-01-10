@@ -45,6 +45,31 @@ const createClass = async (req, res) => {
     }
 }
 
+// Get a class under one subcategory
+const getClass = async (req, res) => {
+    const { _category_id, _subcategory_id, _class_id } = req.query
+    try {
+        const category = await Category.findById(_category_id)
+        if (category) {
+            const subCategory = await category.sub_categories.id(_subcategory_id)
+            if (subCategory) {
+                const classes = await subCategory.classes.id(_class_id)
+                if (classes) {
+                    res.success(res.statusCode, "class fetched!", classes)
+                } else {
+                    res.error(res.statusCode, "class not found!")
+                }
+            } else {
+                res.error(res.statusCode, "subcategory not found!")
+            }
+        } else {
+            res.error(res.statusCode, "category not found!")
+        }
+    } catch (err) {
+        res.error(res.statusCode, err.message)
+    }
+}
+
 // Update a class under one subcategory
 const updateClass = async (req, res) => {
     const { _category_id, _subcategory_id, _class_id, ...rest } = req.body
@@ -97,4 +122,10 @@ const deleteClass = async (req, res) => {
     }
 }
 
-export { getAllClasses, createClass, updateClass, deleteClass }
+export { 
+    getAllClasses, 
+    createClass, 
+    getClass, 
+    updateClass, 
+    deleteClass 
+}

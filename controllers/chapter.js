@@ -38,18 +38,18 @@ const getAllChapters = async (req, res) => {
 
 // Create a new chapter under one subject
 const createChapter = async (req, res) => {
-    const { _category_id, _subcategory_id, _class_id, _subject_id, ...rest } =
-        req.body
+    const { _category_id, _subcategory_id, _class_id, _subject_id, ...rest } = req.body
     try {
         const category = await Category.findById(_category_id)
         if (category) {
-            const subCategory = await category.sub_categories.id(
-                _subcategory_id
-            )
+            const subCategory = await category.sub_categories.id(_subcategory_id)
+            console.log(`subCategory`, subCategory)
             if (subCategory) {
                 const classes = await subCategory.classes.id(_class_id)
+                console.log(`classes`, classes)
                 if (classes) {
                     const subject = await classes.subjects.id(_subject_id)
+                    console.log('subject', subject)
                     if (subject) {
                         await Category.updateOne(
                             {

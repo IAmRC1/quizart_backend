@@ -56,4 +56,10 @@ const deleteCategory = async (req, res) => {
     }
 }
 
-export { getAllCategories, createCategory, getCategory, updateCategory, deleteCategory }
+export { 
+    getAllCategories, 
+    createCategory, 
+    getCategory, 
+    updateCategory, 
+    deleteCategory 
+}

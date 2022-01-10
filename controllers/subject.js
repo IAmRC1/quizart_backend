@@ -35,25 +35,15 @@ const createSubject = async (req, res) => {
             if (subCategory) {
                 const classes = await subCategory.classes.id(_class_id)
                 if (classes) {
-                    await Category.updateOne(
-                        {
-                            _id: _category_id,
-                        },
-                        {
-                            $push: { "sub_categories.$[i].classes.$[j].subjects": rest },
-                        },
-                        {
-                            arrayFilters: [
-                                {
-                                    "i._id": _subcategory_id,
-                                },
-                                {
-                                    "j._id": _class_id,
-                                },
-                            ],
-                        }
-                    )
-                    res.success(res.statusCode, "subject created!")
+                    const newSubject = await classes.subjects.create(rest)
+                    await Category.updateOne({ _id: _category_id, },
+                        { $push: { "sub_categories.$[i].classes.$[j].subjects": rest }, },
+                        { arrayFilters: [
+                                { "i._id": _subcategory_id, },
+                                { "j._id": _class_id, },
+                            ], 
+                        })
+                    res.success(res.statusCode, "subject created!", newSubject)
                 } else {
                     res.error(res.statusCode, "class not found!")
                 }

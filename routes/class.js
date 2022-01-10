@@ -2,6 +2,7 @@ import express from "express"
 import {
     getAllClasses,
     createClass,
+    getClass,
     updateClass,
     deleteClass,
 } from "../controllers/class.js"
@@ -12,8 +13,8 @@ const classRoutes = express.Router()
 
 classRoutes.get("/", getAllClasses)
 classRoutes.post("/", validation(classType), createClass)
-// classRoutes.get("/:id", getClass)
-classRoutes.put("/:id", updateClass)
+classRoutes.get("/:id", getClass)
+classRoutes.patch("/:id", updateClass)
 classRoutes.delete("/:id", deleteClass)
 
 // Todo Add Swagger Docs
